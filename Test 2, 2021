@@ -1,0 +1,188 @@
+## 1) Bravais lattice from the given coordinates
+
+### Given coordinates (copied and normalized mod 1)
+
+Y:
+(0.15, 0, 0); (−0.15, 0, 0.5); (−0.15, 0, 0); (0.15, 0, 0.5); (−0.35, 0.5, 0); (0.35, 0.5, 0.5); (−0.65, 0.5, 0); (0.65, 0.5, 0.5)
+
+First convert negative x to the [0,1) range (add 1 when negative):
+
+* −0.15 → 0.85
+* −0.35 → 0.65
+* −0.65 → 0.35
+
+So the 8 points become (arranged):
+
+Layer y = 0:
+
+1. (0.15, 0, 0)
+2. (0.85, 0, 0)    (from −0.15,0,0)
+3. (0.85, 0, 0.5)  (from −0.15,0,0.5)
+4. (0.15, 0, 0.5)
+
+Layer y = 0.5:
+5. (0.65, 0.5, 0)  (from −0.35)
+6. (0.35, 0.5, 0)  (from −0.65)
+7. (0.35, 0.5, 0.5)
+8. (0.65, 0.5, 0.5)
+
+### Test for centring
+
+Look for a simple centring translation $t$ with components 0 or 1/2 that maps the entire set onto itself. Try $t=(\tfrac12,\tfrac12,0)$ (this is the conventional **C-centering** vector for orthorhombic cells).
+
+Apply $t=(\tfrac12,\tfrac12,0)$ to the four points at y=0:
+
+* (0.15, 0, 0) + t = (0.65, 0.5, 0) → point (5) — present.
+* (0.85, 0, 0) + t = (1.35, 0.5, 0) ≡ (0.35, 0.5, 0) → point (6) — present.
+* (0.85, 0, 0.5) + t = (1.35, 0.5, 0.5) ≡ (0.35, 0.5, 0.5) → point (7) — present.
+* (0.15, 0, 0.5) + t = (0.65, 0.5, 0.5) → point (8) — present.
+
+Mapping the y = 0.5 points back by adding $t$ again (or subtracting) returns the y = 0 set. So the set is invariant under translation $t=(\tfrac12,\tfrac12,0)$.
+
+Because a centring translation of the form $(\tfrac12,\tfrac12,0)$ exists, the Bravais lattice is **C-centred orthorhombic** (often written *C*).
+
+**Answer (1):** **C-centred orthorhombic** Bravais lattice.
+
+---
+
+## 2) Why some “centered” lattices don’t appear among the 14 Bravais lattices
+
+You asked why there’s no **F-centered monoclinic**, **C-centered tetragonal**, **C-centered hexagonal**, or **C-centered cubic** listed among the 14 Bravais lattices. Short answer: **they are either impossible (incompatible with the symmetry) or redundant (equivalent to one of the 14 under a change of cell basis)**.
+
+Detailed reasoning (brief, per case):
+
+* **Redundancy by change-of-basis:** some centered cells can be re-described as a different centering or as a primitive cell by a simple choice of a new basis vectors. For example, a would-centred description of the same lattice may be transformed into an existing Bravais type (primitive or another centring) by taking a different conventional cell. If the centring does not produce a new distinct lattice metric (i.e. cannot be distinguished by symmetry/metric from an existing Bravais type), it is not listed separately.
+
+* **Incompatibility with the point-group symmetry:** some centring vectors would lower or change the lattice symmetry and therefore are not consistent with the symmetry constraints of that crystal system. For example **C-centred hexagonal** is not compatible with the 120° angle symmetry of the hexagonal lattice — the extra centring point would not transform correctly under the 6-fold rotational symmetry; hence it either breaks hexagonal symmetry or can be re-expressed as one of the accepted types.
+
+* **Specific commonly-cited examples:**
+
+  * **C-centred cubic:** placing face-centres on one pair of faces in a cubic system does not produce a new independent lattice; it can be transformed into either F-centred cubic or P by a change of cell orientation (i.e. the “new” lattice is equivalent to an already listed Bravais lattice).
+  * **C-centred tetragonal:** either incompatible with the square base symmetry or equivalent, by a cell redefinition, to another known lattice (e.g. body-centred tetragonal or primitive), so not a distinct Bravais lattice.
+  * **F-centred monoclinic:** monoclinic symmetry is low (only one 2-fold or mirror), and the full-face-centering in that setting either reduces to one of the standard base-centred forms or can be redefined by choosing different axes so it is equivalent to an existing Bravais type.
+
+**Takeaway:** The 14 Bravais lattices exhaust all *distinct* lattice types after identifying lattices that are either symmetry-incompatible or transformable (equivalent) into one another by basis changes. Any other “centred” variant either violates the system’s symmetry or is a redundant description of an already-counted lattice.
+
+---
+
+## 3) [010] projection of a cubic crystal — mark poles (100), (132), (121) and the zone axis common to (132) & (121)
+
+We interpret “projection on [010]” as projecting the direction (h,k,l) onto the plane perpendicular to [010]. I’ll compute:
+
+* the angle θ between each pole direction $ \vec{v}=(h,k,l)$ and the projection axis [010] = (0,1,0), and
+* the azimuth φ in the projection plane (measured from +x axis toward +z).
+
+These two numbers (θ, φ) tell you where to place the pole on a Wulff/stereographic or orthographic plot:
+
+* θ = angle between direction and [010];
+  $\cos\theta = \dfrac{\vec v \cdot [010]}{|\vec v|\,|[010]|} = \dfrac{k}{\sqrt{h^2+k^2+l^2}}$ (since |[010]| = 1).
+* Azimuth φ (in the plane perpendicular to [010]) is the angle of the (h,l) vector measured from +x: $\phi=\arctan\!\big(\dfrac{l}{h}\big)$ (choose correct quadrant).
+
+Compute for each pole (I work out lengths and angles carefully).
+
+### (a) pole (100)
+
+Vector $v=(1,0,0)$.
+
+* $|v|=\sqrt{1^2+0^2+0^2}=1.$
+* $k=0 \Rightarrow \cos\theta = 0 \Rightarrow \theta=90^\circ.$
+  → the (100) pole lies **on the equator** of the projection (90° from [010]).
+* Azimuth $\phi = \arctan(l/h)=\arctan(0/1)=0^\circ$.
+  → Plot (100) at the equator along the +x direction.
+
+### (b) pole (1 3 2)
+
+Vector $v=(1,3,2)$.
+
+* $|v| = \sqrt{1^2 + 3^2 + 2^2} = \sqrt{1+9+4} = \sqrt{14} $.
+  Compute $\sqrt{14}$ carefully: $3^2=9,\; 1+9+4=14,\; \sqrt{14}\approx 3.74165738677.$
+* $k=3$ so $\cos\theta = 3/\sqrt{14} $. Numerically $3/3.74165738677 = 0.8017837257.$
+* $\theta = \arccos(0.8017837257) \approx 36.86989765^\circ.$
+  So the (132) pole is **about 36.87° from the [010] axis** (i.e. relatively near the centre of the projection).
+* Azimuth: $\phi = \arctan(l/h) = \arctan(2/1) = \arctan(2) \approx 63.43494882^\circ.$
+
+**Summary (132):** θ ≈ 36.87°, φ ≈ 63.43° (from +x toward +z).
+
+### (c) pole (1 2 1)
+
+Vector $v=(1,2,1)$.
+
+* $|v| = \sqrt{1^2 + 2^2 + 1^2} = \sqrt{1+4+1} = \sqrt{6}.$
+  $\sqrt{6}\approx 2.44948974278.$
+* $k=2$ so $\cos\theta = 2/\sqrt{6} = 2/2.44948974278 \approx 0.8164965809.$
+* $\theta = \arccos(0.8164965809) \approx 35.26438968^\circ.$
+  So (121) is about **35.26°** from the [010] direction — very close to (132) in polar distance.
+* Azimuth: $\phi=\arctan(l/h)=\arctan(1/1)=\arctan(1)=45^\circ.$
+
+**Summary (121):** θ ≈ 35.26°, φ = 45°.
+
+### Plotting instructions on the [010] projection (Wulff net / stereogram)
+
+* The central pole (center of your net) is [010] (θ = 0).
+* For each pole compute the angular distance from center = θ (the angle between that pole and [010]). On an **orthographic** projection you would plot the pole at radial distance proportional to sinθ (or simply place by measuring angles on the net your lecturer provided). On a **stereographic** net, radial coordinate depends on $\tan(\tfrac{\theta}{2})$ (use the net or table). Your lecture Wulff net will tell which mapping to use — use the θ values above and the φ azimuth to mark points.
+* **(100)**: θ = 90°, φ = 0° → lies on equator at +x direction.
+* **(121)**: θ ≈ 35.26°, φ = 45° → near centre along azimuth 45°.
+* **(132)**: θ ≈ 36.87°, φ ≈ 63.43° → near centre along azimuth ≈63.4°.
+
+So on the net you will place (121) and (132) near the center (slightly off center) at the given azimuths; (100) sits on the equator at the +x direction.
+
+### Zone axis common to planes (132) and (121)
+
+Two planes (h₁k₁ℓ₁) and (h₂k₂ℓ₂) share a **zone** (their intersection line) whose direction indices are given by the cross product of their normals:
+
+Compute $\vec{d} = (1,3,2)\times(1,2,1)$.
+
+Do cross product carefully (component by component):
+
+$$
+\vec d = 
+\begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+1 & 3 & 2 \\
+1 & 2 & 1
+\end{vmatrix}
+= \mathbf{i}(3\cdot1-2\cdot2)-\mathbf{j}(1\cdot1-2\cdot1)+\mathbf{k}(1\cdot2-3\cdot1).
+$$
+
+Compute each:
+
+* For i: $3\cdot1-2\cdot2 = 3-4 = -1.$
+* For j: $1\cdot1-2\cdot1 = 1-2 = -1$, but with the minus sign gives $ -(-1) = +1.$
+* For k: $1\cdot2-3\cdot1 = 2-3 = -1.$
+
+So $\vec d = (-1,\; +1,\; -1)$. We can multiply by −1 to write it as $[1,-1,1]$ (equivalent direction). So the zone axis is **[−1 1 −1] ≡ [1 −1 1]**.
+
+Project this zone direction onto the [010] projection:
+
+* For direction $\vec d = (-1,1,-1)$: polar angle relative to [010]: $|\vec d| = \sqrt{(-1)^2+1^2+(-1)^2}=\sqrt{3}\approx1.73205.$
+  $k=1$ so $\cos\theta = 1/\sqrt{3}\approx0.57735$ ⇒ $\theta\approx54.7356^\circ.$
+* Azimuth from +x uses (h,l)=(-1,-1) ⇒ $\phi=\arctan((-1)/(-1))=\arctan(1)=45^\circ$ but both negative → position in the 3rd quadrant ⇒ φ = 225°. (Or state direction lies toward negative x and negative z.)
+
+So **zone axis [−1 1 −1]** projects at polar angle ≈54.74° and azimuth ≈225° (i.e. roughly opposite the quadrant where (121) and (132) lie). On the Wulff net mark the direction found by the cross product — that is the common line of intersection of the two plane poles.
+
+---
+
+## 4) For a cubic crystal show the Miller indices of the direction normal to (hkl) is [hkl]
+
+**Proof (simple and standard):**
+
+* A plane $(h\,k\,\ell)$ in a crystal is represented by the reciprocal-lattice vector
+  $\mathbf{G} = h\mathbf{a}^* + k\mathbf{b}^* + \ell\mathbf{c}^*$,
+  where $\mathbf{a}^*,\mathbf{b}^*,\mathbf{c}^*$ are the reciprocal basis vectors. The vector $\mathbf{G}$ points in the direction normal to the plane (hkl).
+
+* In a **cubic** lattice with lattice parameter $a$ and orthonormal basis, the reciprocal vectors are parallel to the direct basis and have magnitude $a^* = \tfrac{2\pi}{a}$ along x, etc. So $\mathbf{a}^*\propto\hat{\mathbf{x}},\ \mathbf{b}^*\propto\hat{\mathbf{y}},\ \mathbf{c}^*\propto\hat{\mathbf{z}}$.
+
+* Therefore $\mathbf{G}$ points along the cartesian vector $(h,k,\ell)$ (in direct-space coordinates). Thus the direction normal to the plane (hkl) is exactly along the vector with direction indices $[h\,k\,\ell]$.
+
+Hence, in cubic crystals the direction normal to plane $(hkl)$ is $[hkl]$.
+
+*(If you want a slightly more formal statement: the direction cosines of the plane normal are proportional to $h/a,\ k/b,\ \ell/c$. For cubic $a=b=c$, so they are proportional to $h,k,\ell$; hence the direction is $[hkl]$.)*
+
+---
+
+If you want, I can:
+
+* Make a neat diagram of the [010] projection with the computed θ and φ points plotted on a provided Wulff net (I can compute stereographic coordinates for you), or
+* Produce a small Python script that plots the poles and zone axis on an orthographic or stereographic projection so you can see the exact positions.
+
+Which would you like next?
